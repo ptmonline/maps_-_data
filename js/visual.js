@@ -1,13 +1,15 @@
-var svg = d3.select("svg"),
-    width = +svg.attr("width");
+var svg = d3.select("svg")
+  .attr("width", window.innerWidth || document.body.clientWidth)
+  .attr("height", window.innerHeight || document.body.clientHeight)
 
+    // width = +svg.attr("width");
 var format = d3.format(",d");
 
 
 
-var pack = d3.pack()
-    .size([width, width])
-    .padding(1.5);
+// var pack = d3.pack()
+//     .size([width, width])
+//     .padding(1.5);
 
 d3.csv("0_HORTS_URBANS.csv", function(data) {
     data.forEach(function(d) {
@@ -40,9 +42,24 @@ d3.csv("0_HORTS_URBANS.csv", function(data) {
       .transition()
         .duration(Math.floor((Math.random() * 1000) + 1))
         .attr("r", function(d) {  return Math.floor((Math.random() * 50) + 1);})
+        .style("opacity", function(d){ return Math.random();})
+
+    }
+
+    function move(){
+      d3.selectAll(".node")
+        .transition()
+        .duration(Math.floor((Math.random() * 5000) + 1))
+        .attr("transform", function(d) { return "translate(" +Math.floor((Math.random() * 1000) + 1) + "," + Math.floor((Math.random() * 700) + 1) + ")"; });
+
     }
 
     setInterval(function(){
       redraw();
-    }, 500)
+
+    }, Math.floor((Math.random() * 2000) + 1))
+
+    setInterval(function(){
+      move();
+    }, Math.floor((Math.random() * 2000) + 1))
 });
