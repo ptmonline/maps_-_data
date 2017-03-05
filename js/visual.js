@@ -8,27 +8,11 @@ var format = d3.format(",d");
 var pack = d3.pack()
     .size([width, width])
     .padding(1.5);
-var letters = [];
 
-// d3.csv("0_HORTS_URBANS.csv", function(d) {
-//   var thex = parseFloat(d.ED50_COORD_X) / 10000;
-//   var they = parseFloat(d.ED50_COORD_Y) / 100000;
-//   console.log(d.EQUIPAMENT);
-//   console.log(parseFloat(d.ED50_COORD_Y) / 100000);
-//   if (d) return d;
-// }, function(error, classes) {
-//   if (error) throw error;
-//
-//   var root = d3.hierarchy({children: classes})
-//       .sum(function(d) { return d; })
-//       .each(function(d) {
-//         var x = parseFloat(d.ED50_COORD_X) / 10000;
-//         var y = parseFloat(d.ED50_COORD_Y) / 100000;
-//       });
-      d3.csv("0_HORTS_URBANS.csv", function(data) {
-          data.forEach(function(d) {
-            title = d.EQUIPAMENTS;
-      });
+d3.csv("0_HORTS_URBANS.csv", function(data) {
+    data.forEach(function(d) {
+      title = d.EQUIPAMENTS;
+    });
   var node = svg.selectAll(".node")
     .data(data)
     .enter().append("g")
