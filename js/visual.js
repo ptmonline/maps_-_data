@@ -4,8 +4,9 @@ var svg = d3.select("svg")
 
     // width = +svg.attr("width");
 var format = d3.format(",d");
-
-
+var caixa = document.getElementById("#titulation");
+var box = d3.select("#titulation")
+var title =[];
 
 // var pack = d3.pack()
 //     .size([width, width])
@@ -13,13 +14,17 @@ var format = d3.format(",d");
 
 d3.csv("0_HORTS_URBANS.csv", function(data) {
     data.forEach(function(d) {
-      title = d.EQUIPAMENTS;
+      title.push(d.EQUIPAMENT);
     });
   var node = svg.selectAll(".node")
     .data(data)
     .enter().append("g")
       .attr("class", "node")
       .attr("transform", function(d) { return "translate(" +Math.floor((Math.random() * 1000) + 1) + "," + Math.floor((Math.random() * 700) + 1) + ")"; });
+  // var box = d3.select("#container")
+  //   .data(data)
+  //   .enter().append("p")
+  //   .text(function(d){return d.EQUIPAMENT})
 
   node.append("circle")
       .attr("class", function(d) { return d.CODI_CAPA; })
@@ -28,6 +33,39 @@ d3.csv("0_HORTS_URBANS.csv", function(data) {
       .style("fill", "000000")
       .style("opacity", function(d){ return Math.random();})
 
+
+  // var columns = ["name"];
+  //
+  //   var table = d3.select("#container").append("table"),
+  //       thead = table.append("thead"),
+  //       tbody = table.append("tbody");
+  //
+  //   // append the header row
+  //   thead.append("tr")
+  //       .selectAll("th")
+  //       .data(columns)
+  //       .enter()
+  //       .append("th")
+  //       .attr("class", "Helveticalined")
+  //       .text(function(column) { return column; });
+  //
+  //   // create a row for each object in the data
+  //   var rows = tbody.selectAll("tr")
+  //       .data(data)
+  //       .enter()
+  //       .append("tr")
+  //       .attr("class", "Helveticalined")
+  //       .text(function(d) { console.log(d); return d.EQUIPAMENT });
+
+    // // create a cell in each row for each column
+    // var cells = rows.selectAll("td")
+    //     .data(data)
+    //     .enter()
+    //     .append("td")
+    //     .attr("font-family", "sans-serif")
+    //     .attr("font-size", "20px")
+    //     .attr("fill", "black")
+    //     .text(function(d) { console.log(d); return d.EQUIPAMENT });
 
   node.append("text")
     .attr("dx", function(d){return 20})
@@ -51,12 +89,10 @@ d3.csv("0_HORTS_URBANS.csv", function(data) {
         .transition()
         .duration(Math.floor((Math.random() * 5000) + 1))
         .attr("transform", function(d) { return "translate(" +Math.floor((Math.random() * 1000) + 1) + "," + Math.floor((Math.random() * 700) + 1) + ")"; });
-
     }
 
     setInterval(function(){
       redraw();
-
     }, Math.floor((Math.random() * 2000) + 1))
 
     setInterval(function(){
