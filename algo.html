@@ -79,6 +79,7 @@ function resample(points) {
       n = points.length,
       p0 = points[n - 1], x0 = p0[0], y0 = p0[1], p1, x1, y1,
       points2 = [];
+      console.log(n)
   while (++i < n) {
     p1 = points[i], x1 = p1[0], y1 = p1[1];
     points2.push(
