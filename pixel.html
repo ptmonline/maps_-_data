@@ -4,14 +4,14 @@
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script>
 
-var maxRadius = 2, // maximum radius of circle
+var maxRadius = 4, // maximum radius of circle
     padding = 1, // padding between circles; also minimum radius
     margin = {top: -maxRadius, right: -maxRadius, bottom: -maxRadius, left: -maxRadius},
     width =  (window.innerWidth || document.body.clientWidth) - margin.left - margin.right,
     height = (window.innerHeight || document.body.clientHeight) - margin.top - margin.bottom;
 
 var k = 1, // initial number of candidates to consider per circle
-    m = 100, // initial number of circles to add per frame
+    m = 1000, // initial number of circles to add per frame
     n = 50000, // remaining number of circles to add
     newCircle = bestCircleGenerator(maxRadius, padding);
 
@@ -24,21 +24,38 @@ var svg = d3.select("body").append("svg")
 d3.timer(function() {
   for (var i = 0; i < m && --n >= 0; ++i) {
     var circle = newCircle(k);
-
-    svg.append("circle")
+   svg.append("circle")
         .attr("cx", circle[0])
         .attr("cy", circle[1])
         .attr("r", 0)
         .style("fill-opacity", (Math.random() + .5) / 2)
       .transition()
-        .attr("r", circle[2]);
+        .attr("r", circle[2])
+      .transition()
+        .duration(Math.floor((Math.random() * 10000) + 1))
+        // .attr("cx", Math.floor((Math.random() * 1000) + 1))
+        // .attr("cy", Math.floor((Math.random() * 700) + 1))
+        .attr("transform", "translate(" + Math.floor((Math.random() * 1000) + 1) + "," + Math.floor((Math.random() * 700) + 1) + ")");
 
     // As we add more circles, generate more candidates per circle.
     // Since this takes more effort, gradually reduce circles per frame.
     if (k < 500) k *= 1.01, m *= .998;
   }
+  // function move(){
+  //   console.log('moving')
+  //     d3.selectAll("circle")
+  //       .transition()
+  //       .duration(Math.floor((Math.random() * 1000) + 1))
+  //       .attr("cx", Math.floor((Math.random() * 1000) + 1))
+  //       .attr("cy", Math.floor((Math.random() * 700) + 1))
+  //   }
+    // setInterval(function(){
+    //   move();
+    // }, Math.floor((Math.random() * 2000) + 1))
   return !n;
 });
+
+
 
 function bestCircleGenerator(maxRadius, padding) {
   var quadtree = d3.geom.quadtree().extent([[0, 0], [width, height]])([]),
