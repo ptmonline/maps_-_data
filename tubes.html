@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Circle Tunnel</title>
+    <style>
+      body {
+        background-color: black;
+      }
+      .container {
+        background-color: black;
+        margin: 0 auto;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="chart"></div>
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script>
+    var width = 960;
+    var height = 500;
+    var padding = {top: 30, right: 30, bottom: 30, left: 30};
+
+    var svg = d3.select("#chart").append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .attr("class", "container")
+      .append("g")
+        .attr("transform", "translate(20, "+ height / 2+ ")");
+
+
+    var data = d3.range(150).map(function(d) {
+      return d;
+    });
+
+    var circle = svg.selectAll("ellipse")
+      .data(data)
+      .enter()
+      .append("ellipse")
+      .attr("cy", 0)
+      .attr("cx", function(d) {return d * 5})
+      .attr("ry", 5)
+      .attr("rx", function(d, i) {return 20})
+      .attr("fill", "black")
+      .attr("stroke", "white")
+      .attr("stroke-width", 1)
+      .transition()
+      .delay(function(d,i) {
+        return i * 70
+      })
+      .duration(1000)
+      .on("start", function repeat() {
+        d3.active(this)
+            .attr("ry", 50)
+          .transition()
+            .attr("ry", 5)
+          .transition()
+            .on("start", repeat);
+      });
+    </script>
+  </body>
+</html>
