@@ -42,7 +42,7 @@
       .attr("cy", Math.floor((Math.random() * 1) + 1))
       .attr("cx", function(d) {return d * Math.floor((Math.random() * 5) + 1)})
       .attr("ry", Math.floor((Math.random() * 5) + 1))
-      .attr("rx", function(d, i) {return Math.floor((Math.random() * 20) + 1)})
+      .attr("rx", function(d, i) {return Math.floor((Math.random() * 10) + 1)})
       .attr("fill", "black")
       .attr("stroke", "white")
       .attr("stroke-width", 1)
@@ -59,6 +59,8 @@
           .transition()
             .on("start", repeat);
       });
+
+
     </script>
   </body>
 </html>
