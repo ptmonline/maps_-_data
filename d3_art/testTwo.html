@@ -28,7 +28,7 @@
         .append("g")
           .attr("transform", "translate(20, "+ height / 2+ ")");
 
-      var data = d3.range(150).map(function(d){
+      var data = d3.range(1000).map(function(d){
         return d
       })
 
@@ -36,17 +36,26 @@
         .data(data)
         .enter()
         .append("line")
-        .attr("y1", function(d){return d* 5})
-        .attr("x1", function(d){return d* 5})
-        .attr("y2", function(d){return d* 80})
-        .attr("x2", function(d){return d* 5})
+        .attr("y1", function(d){return Math.floor((Math.random() * 500) + 5)})
+        .attr("x1", function(d){return  Math.floor((Math.random() * 700) + 5)})
+        .attr("y2", function(d){return  Math.floor((Math.random() * 100) + 5)})
+        .attr("x2", function(d){return  Math.floor((Math.random() * 1000) + 5)})
         .attr("fill", "black")
         .attr("stroke", "white")
-        .attr("stroke-width", 1)
+        .attr("stroke-width", .5)
         .transition()
         .delay(function(d,i) {
           return i * 70
         })
+        .duration(1000)
+        .on("start", function repeat() {
+          d3.active(this)
+              .attr("y1", Math.floor((Math.random() * 500) + 1))
+            .transition()
+              .attr("y2", Math.floor((Math.random() * 1000) + 1))
+            .transition()
+              .on("start", repeat);
+        });
 
         // x1="5" y1="5" x2="40" y2="40" stroke="gray" stroke-width="5"
 
