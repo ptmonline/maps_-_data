@@ -29,11 +29,11 @@
     g.selectAll('rect').data(d3.range(n))
     	.enter().append('rect')
     	.attr({
-        width : 173,
-        height: function(d) { return d / n * 2550 },
+        width : Math.floor((Math.random() * 175) + 1),
+        height: function(d) { return d / n * Math.floor((Math.random() * 2550) + 1) },
         transform: function (d) {
           return 'rotate(' + (d * 6661 / n) + ') ' +
-            'translate(' + [Math.pow(d / n, 6.31419407974397) * 40, 25] + ')';
+            'translate(' + [Math.pow(d / n, 6.31419407974397) * Math.floor((Math.random() * 40) + 1), 25] + ')';
         }
       }).style({
       	fill: 'rgba(0, 0, 0, 0.05)'
