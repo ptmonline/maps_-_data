@@ -28,7 +28,7 @@
         .append("g")
           .attr("transform", "translate(20, "+ height / 2+ ")");
 
-      var data = d3.range(100).map(function(d){
+      var data = d3.range(500).map(function(d){
         return d
       })
 
@@ -50,9 +50,12 @@
         .duration(1000)
         .on("start", function repeat() {
           d3.active(this)
-              .attr("x1", Math.floor((Math.random() * 500) + 1))
+              .attr("x2", Math.floor((Math.random() * 500) + 1))
             .transition()
               .attr("y2", Math.floor((Math.random() * 1000) + 1))
+               .attr("x1", Math.floor((Math.random() * 500) + 1))
+            .transition()
+              .attr("y1", Math.floor((Math.random() * 1000) + 1))
             .transition()
               .on("start", repeat);
         });
