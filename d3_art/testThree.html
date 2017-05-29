@@ -19,12 +19,10 @@
       .attr("height", height + margin.top + margin.bottom)
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-    
+ 
     var g = svg.append('g')
     	.attr('transform', 'translate(' + [width / 2, height / 2] + ')');
    
-    
     var n = 177;
     g.selectAll('rect').data(d3.range(n))
     	.enter().append('rect')
