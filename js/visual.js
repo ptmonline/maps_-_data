@@ -2,15 +2,10 @@ var svg = d3.select("svg")
   .attr("width", window.innerWidth || document.body.clientWidth)
   .attr("height", window.innerHeight || document.body.clientHeight)
 
-    // width = +svg.attr("width");
 var format = d3.format(",d");
 var caixa = document.getElementById("#titulation");
 var box = d3.select("#titulation")
 var title =[];
-
-// var pack = d3.pack()
-//     .size([width, width])
-//     .padding(1.5);
 
 d3.csv("0_HORTS_URBANS.csv", function(data) {
     data.forEach(function(d) {
@@ -21,10 +16,6 @@ d3.csv("0_HORTS_URBANS.csv", function(data) {
     .enter().append("g")
       .attr("class", "node")
       .attr("transform", function(d) { return "translate(" +Math.floor((Math.random() * 1000) + 1) + "," + Math.floor((Math.random() * 700) + 1) + ")"; });
-  // var box = d3.select("#container")
-  //   .data(data)
-  //   .enter().append("p")
-  //   .text(function(d){return d.EQUIPAMENT})
 
   node.append("circle")
       .attr("class", function(d) { return d.CODI_CAPA; })
@@ -32,40 +23,6 @@ d3.csv("0_HORTS_URBANS.csv", function(data) {
       .attr("stroke","black")
       .style("fill", "000000")
       .style("opacity", function(d){ return Math.random();})
-
-
-  // var columns = ["name"];
-  //
-  //   var table = d3.select("#container").append("table"),
-  //       thead = table.append("thead"),
-  //       tbody = table.append("tbody");
-  //
-  //   // append the header row
-  //   thead.append("tr")
-  //       .selectAll("th")
-  //       .data(columns)
-  //       .enter()
-  //       .append("th")
-  //       .attr("class", "Helveticalined")
-  //       .text(function(column) { return column; });
-  //
-  //   // create a row for each object in the data
-  //   var rows = tbody.selectAll("tr")
-  //       .data(data)
-  //       .enter()
-  //       .append("tr")
-  //       .attr("class", "Helveticalined")
-  //       .text(function(d) { console.log(d); return d.EQUIPAMENT });
-
-    // // create a cell in each row for each column
-    // var cells = rows.selectAll("td")
-    //     .data(data)
-    //     .enter()
-    //     .append("td")
-    //     .attr("font-family", "sans-serif")
-    //     .attr("font-size", "20px")
-    //     .attr("fill", "black")
-    //     .text(function(d) { console.log(d); return d.EQUIPAMENT });
 
   node.append("text")
     .attr("dx", function(d){return 20})
